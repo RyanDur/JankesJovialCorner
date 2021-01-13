@@ -4,6 +4,4 @@
 npm run build
 ```
 
-or
-
 to bundle your application
