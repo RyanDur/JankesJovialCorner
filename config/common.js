@@ -25,4 +25,28 @@ exports.common = ({dist}) => merge([{
             template: 'index.html'
         })
     ]
-}, loadJS()]);
+}, {
+    module: {
+        rules: [
+            {
+                test: /\.m?js$/,
+                enforce: "pre",
+                exclude: /node_modules/,
+                use: ["source-map-loader", {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }, {
+                    enforce: "pre",
+                    test: /\.m?js$/,
+                    exclude: /node_modules/,
+                    loader: "eslint-loader",
+                },]
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['*', '.jsx', '.js', '.mjs']
+    },
+}]);
